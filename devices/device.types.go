@@ -1,6 +1,6 @@
 package devices
 
-type Device struct { // TODO remove tag ?
+type Device struct {
 	Id          string `json:"id"`
 	DeviceModel string `json:"deviceModel"`
 	Name        string `json:"name"`

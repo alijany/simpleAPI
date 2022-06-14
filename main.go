@@ -1,12 +1,22 @@
 package main
 
 import (
+	"log"
 	"main/common"
 	"main/devices"
+
+	"github.com/aws/aws-lambda-go/lambda"
 )
 
 func main() {
-	var config, _ = common.InitializeConfig() // TODO error handing
+	config, err := common.InitializeConfig()
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	devices.Handler(config)
+	router, err := devices.Handler(config)
+	if err != nil {
+		log.Fatal(err)
+	}
+	lambda.Start(router)
 }

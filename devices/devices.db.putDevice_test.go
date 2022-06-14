@@ -1,16 +1,19 @@
 package devices
 
 import (
-	"main/common"
 	"testing"
 )
 
 func TestPutDevice(t *testing.T) {
-	mockSvc := &common.Config{DynamoDB: &DynamodbMockClient{}}
+	err := putDevice(mockConfig, &Device{
+		Id:          "/devices/id1",
+		DeviceModel: "/devicemodels/id1",
+		Name:        "Sensor",
+		Note:        "Testing a sensor.",
+		Serial:      "A020000102",
+	})
 
-	device, err := getDevice(mockSvc, "/devices/id1")
-
-	if err != nil || device == nil {
-		t.Error("error in getDevice", err, device)
+	if err != nil {
+		t.Error("error in putDevice", err)
 	}
 }

@@ -1,12 +1,13 @@
 package devices
 
 import (
-	"main/common"
 	"testing"
 )
 
 func TestHandler(t *testing.T) {
-	config := &common.Config{DynamoDB: &DynamodbMockClient{}}
+	_, err := Handler(mockConfig)
 
-	Handler(config)
+	if err != nil {
+		t.Error("error in putDevice", err)
+	}
 }

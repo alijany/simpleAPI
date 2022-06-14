@@ -5,18 +5,27 @@ import (
 	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-sdk-go/service/dynamodb"
 )
 
-func Handler(config *common.Config) {
+type HandlerCallback func(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
+
+func Handler(config *common.Config) (HandlerCallback, error) {
 	// Create tables (concurrent)
-	// TODO: skip errors only if tables exist!
 	channel := make(chan error, 2)
 	go createDeviceTable(config, channel)
 	go createModelTable(config, channel)
-	_, _ = <-channel, <-channel
 
-	router := func(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	// skip errors only if tables exist!
+	for i := 0; i < 2; i++ {
+		err := <-channel
+		_, okTb1 := err.(*dynamodb.TableAlreadyExistsException)
+		if err != nil && !okTb1 {
+			return nil, err
+		}
+	}
+
+	return func(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 		switch req.HTTPMethod {
 		case "GET":
 			return get(config, req)
@@ -25,7 +34,5 @@ func Handler(config *common.Config) {
 		default:
 			return common.ClientError(http.StatusMethodNotAllowed)
 		}
-	}
-
-	lambda.Start(router)
+	}, nil
 }
