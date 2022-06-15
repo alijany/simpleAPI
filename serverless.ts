@@ -14,7 +14,7 @@ const serverlessConfiguration: Serverless = {
   },
   provider: {
     name: 'aws',
-    stage: 'dev',
+    // stage: 'dev',
     region: 'us-east-1',
     environment: {
       TABLE_PREFIX: '${self:service}-${opt:stage, self:provider.stage}-'
@@ -25,7 +25,7 @@ const serverlessConfiguration: Serverless = {
           Effect: 'Allow',
           Action: [
             'dynamodb:DescribeTable',
-            // 'dynamodb:Query',
+            'dynamodb:CreateTable',
             // 'dynamodb:Scan',
             'dynamodb:GetItem',
             'dynamodb:PutItem',
