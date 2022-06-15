@@ -1,7 +1,6 @@
 package devices
 
 import (
-	"errors"
 	"main/common"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -9,11 +8,11 @@ import (
 )
 
 func putItem(config *common.Config, device *Device) error {
-	// check if DeviceModel exist
-	model, _ := getItemById[DeviceModel](config, modelTableName, device.DeviceModel)
-	if model == nil {
-		return errors.New("device model is not found")
-	}
+	// check if DeviceModel doesn't exist (needs putModels route)
+	// model, _ := getItemById[DeviceModel](config, modelTableName, device.DeviceModel)
+	// if model == nil {
+	// 	return errors.New("device model is not found")
+	// }
 
 	input := &dynamodb.PutItemInput{
 		TableName: aws.String(deviceTableName),
