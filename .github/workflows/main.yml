@@ -1,0 +1,37 @@
+name: Deploy master branch
+
+env:
+  GOOS: "linux" 
+  GOARCH: "amd64"
+
+on: workflow_dispatch
+#   push:
+#     branches:
+#       - master
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    # install nodejs dependencies
+#     - name: Setup Node.js environment
+#       uses: actions/setup-node@v3.3.0
+#     - run: npm ci
+    
+    # install & build golang files
+    - name: Setup Go environment
+      uses: actions/setup-go@v3.2.0
+    - run: go get
+    - run: go build -o bin/main
+      
+#     - name: serverless deploy
+#       uses: serverless/github-action@v3.1
+#       with:
+#         args: deploy
+#       env:
+#         # SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+#         # or if using AWS credentials directly
+#         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
