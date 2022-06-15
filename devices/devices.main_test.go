@@ -41,7 +41,7 @@ func TestHandler(t *testing.T) {
 	request = events.APIGatewayProxyRequest{
 		HTTPMethod: http.MethodGet,
 		Path:       "api/devices/id1",
-		QueryStringParameters: map[string]string{
+		PathParameters: map[string]string{
 			"id": "id1",
 		},
 	}
@@ -53,7 +53,7 @@ func TestHandler(t *testing.T) {
 	request = events.APIGatewayProxyRequest{
 		HTTPMethod: http.MethodPut,
 		Path:       "api/devices/id1",
-		QueryStringParameters: map[string]string{
+		PathParameters: map[string]string{
 			"id": "id1",
 		},
 	}
