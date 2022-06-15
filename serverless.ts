@@ -14,7 +14,7 @@ const serverlessConfiguration: Serverless = {
   },
   provider: {
     name: 'aws',
-    // stage: 'dev',
+    stage: 'dev',
     region: 'us-east-1',
     environment: {
       TABLE_PREFIX: '${self:service}-${opt:stage, self:provider.stage}-'
