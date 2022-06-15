@@ -2,7 +2,6 @@ package devices
 
 import (
 	"encoding/json"
-	"log"
 	"main/common"
 	"net/http"
 	"regexp"
@@ -14,9 +13,11 @@ var idRegex = regexp.MustCompile(`^id\d+$`)
 
 func get(config *common.Config, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	id := req.QueryStringParameters["id"]
-	log.Panic(id)
 	if !idRegex.MatchString(id) {
-		return common.ClientError(http.StatusBadRequest)
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusOK,
+			Body:       string(id),
+		}, nil
 	}
 
 	device, err := getItemById[Device](config, deviceTableName, id)
