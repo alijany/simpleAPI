@@ -1,9 +1,5 @@
 name: Deploy master branch
 
-env:
-  GOOS: "linux" 
-  GOARCH: "amd64"
-
 on:
   push:
     branches:
@@ -27,7 +23,7 @@ jobs:
         go-version: "^1.18.3"
     - run: go version
     - run: go get
-    - run: go build -o bin/main
+    - run: env GOOS=linux go build -ldflags="-s -w" -o bin/main main.go
       
     - name: serverless deploy
       uses: serverless/github-action@v3.1

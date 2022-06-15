@@ -18,14 +18,6 @@ func createModelTable(config *common.Config, channel chan error) {
 				AttributeName: aws.String("Id"),
 				AttributeType: aws.String("S"),
 			},
-			{
-				AttributeName: aws.String("Name"),
-				AttributeType: aws.String("S"),
-			},
-			{
-				AttributeName: aws.String("Note"),
-				AttributeType: aws.String("S"),
-			},
 		},
 		KeySchema: []*dynamodb.KeySchemaElement{
 			{

@@ -1,6 +1,6 @@
 
 import type { Serverless } from 'serverless/aws';
-import deviceFunctions from './devices/devices.functions';
+// import deviceFunctions from './devices/devices.functions';
 
 const serverlessConfiguration: Serverless = {
   app: 'aws-simple-api',
