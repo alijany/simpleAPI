@@ -1,5 +1,9 @@
 name: Deploy master branch
 
+env:
+  GOOS: "linux" 
+  GOARCH: "amd64"
+
 on: workflow_dispatch
 #   push:
 #     branches:
@@ -18,9 +22,8 @@ jobs:
     
     # install & build golang files
     - name: Setup Go environment
-      uses: actions/setup-go@v3.2.0
+      uses: actions/setup-go@v3
       with:
-        go-version: '18'
         check-latest: true
     - run: go get
     - run: go build -o bin/main
