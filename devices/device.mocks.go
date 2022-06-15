@@ -21,23 +21,35 @@ func (m *DynamodbMockClient) GetItem(input *dynamodb.GetItemInput) (
 ) {
 	switch *input.TableName {
 	case deviceTableName:
-		return &dynamodb.GetItemOutput{
-			Item: map[string]*dynamodb.AttributeValue{
-				"Id":          {S: aws.String("/devices/id1")},
-				"DeviceModel": {S: aws.String("/devicemodels/id1")},
-				"Name":        {S: aws.String("Sensor")},
-				"Note":        {S: aws.String("Testing a sensor.")},
-				"Serial":      {S: aws.String("A020000102")},
-			},
-		}, nil
+		key := *input.Key["Id"].S
+		if key == "/devices/id1" {
+			return &dynamodb.GetItemOutput{
+				Item: map[string]*dynamodb.AttributeValue{
+					"Id":          {S: aws.String("/devices/id1")},
+					"DeviceModel": {S: aws.String("/devicemodels/id1")},
+					"Name":        {S: aws.String("Sensor")},
+					"Note":        {S: aws.String("Testing a sensor.")},
+					"Serial":      {S: aws.String("A020000102")},
+				},
+			}, nil
+		} else {
+			return &dynamodb.GetItemOutput{}, nil
+		}
 	case modelTableName:
-		return &dynamodb.GetItemOutput{
-			Item: map[string]*dynamodb.AttributeValue{
-				"Id":   {S: aws.String("/devicemodels/id1")},
-				"Name": {S: aws.String("Test model")},
-				"Note": {S: aws.String("Testing a model.")},
-			},
-		}, nil
+		key := *input.Key["Id"].S
+		if key == "/devicemodels/id1" {
+			return &dynamodb.GetItemOutput{
+				Item: map[string]*dynamodb.AttributeValue{
+					"Id":   {S: aws.String("/devicemodels/id1")},
+					"Name": {S: aws.String("Test model")},
+					"Note": {S: aws.String("Testing a model.")},
+				},
+			}, nil
+		} else {
+			return &dynamodb.GetItemOutput{}, nil
+		}
+	case "Empty":
+		return &dynamodb.GetItemOutput{}, nil
 	default:
 		return &dynamodb.GetItemOutput{}, &dynamodb.TableNotFoundException{}
 	}

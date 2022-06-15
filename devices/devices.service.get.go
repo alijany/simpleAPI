@@ -17,7 +17,7 @@ func get(config *common.Config, req events.APIGatewayProxyRequest) (events.APIGa
 		return common.ClientError(http.StatusBadRequest)
 	}
 
-	device, err := getDevice(config, id)
+	device, err := getItemById[Device](config, deviceTableName, id)
 	if err != nil {
 		return common.ServerError(err)
 	}

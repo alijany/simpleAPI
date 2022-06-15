@@ -1,17 +1,18 @@
 package devices
 
 import (
+	"errors"
 	"main/common"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 )
 
-func putDevice(config *common.Config, device *Device) error {
+func putItem(config *common.Config, device *Device) error {
 	// check if DeviceModel exist
-	_, err := getModel(config, device.DeviceModel)
-	if err != nil {
-		return err
+	model, _ := getItemById[DeviceModel](config, modelTableName, device.DeviceModel)
+	if model == nil {
+		return errors.New("device model is not found")
 	}
 
 	input := &dynamodb.PutItemInput{
@@ -25,6 +26,6 @@ func putDevice(config *common.Config, device *Device) error {
 		},
 	}
 
-	_, err = config.DynamoDB.PutItem(input)
+	_, err := config.DynamoDB.PutItem(input)
 	return err
 }

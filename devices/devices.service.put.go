@@ -30,12 +30,12 @@ func put(config *common.Config, req events.APIGatewayProxyRequest) (events.APIGa
 		return common.ClientError(http.StatusBadRequest)
 	}
 
-	err = putDevice(config, device)
+	err = putItem(config, device)
 	if err != nil {
 		return common.ServerError(err)
 	}
 
 	return events.APIGatewayProxyResponse{
-		StatusCode: 201,
+		StatusCode: http.StatusCreated,
 	}, nil
 }
