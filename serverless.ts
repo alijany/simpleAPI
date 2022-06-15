@@ -1,9 +1,17 @@
 
 import type { Serverless } from 'serverless/aws';
+import deviceFunctions from './devices/devices.functions';
 
 const serverlessConfiguration: Serverless = {
   app: 'aws-simple-api',
   service: 'aws-simple-api',
+  functions: {
+    ...deviceFunctions
+  },
+  package: {
+    exclude: ["./**"],
+    include: ["./bin/**"]
+  },
   provider: {
     name: 'aws',
     stage: 'dev',
@@ -15,7 +23,7 @@ const serverlessConfiguration: Serverless = {
         statements: [{
           Effect: 'Allow',
           Action: [
-            // 'dynamodb:DescribeTable',
+            'dynamodb:DescribeTable',
             // 'dynamodb:Query',
             // 'dynamodb:Scan',
             'dynamodb:GetItem',
