@@ -6,7 +6,13 @@ const serverlessConfiguration: Serverless = {
   app: 'aws-simple-api',
   service: 'aws-simple-api',
   functions: {
-    ...deviceFunctions
+    devices: {
+      handler: 'bin/main',
+      events: [
+        { http: { method: 'post', path: '/api/devices', cors: true } },
+        { http: { method: 'get', path: '/api/devices/{id+}', cors: true } },
+      ]
+    }
   },
   package: {
     exclude: ["./**"],
@@ -15,6 +21,7 @@ const serverlessConfiguration: Serverless = {
   provider: {
     name: 'aws',
     stage: 'dev',
+    runtime: "go1.x",
     region: 'us-east-1',
     environment: {
       TABLE_PREFIX: '${self:service}-${opt:stage, self:provider.stage}-'
