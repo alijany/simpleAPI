@@ -22,6 +22,6 @@ func ServerError(err error) (events.APIGatewayProxyResponse, error) {
 func ClientError(status int) (events.APIGatewayProxyResponse, error) {
 	return events.APIGatewayProxyResponse{
 		StatusCode: status,
-		Body:       `{"error":"internal server error!!"}`,
+		Body:       http.StatusText(status),
 	}, nil
 }
