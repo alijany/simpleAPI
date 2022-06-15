@@ -4,10 +4,10 @@ env:
   GOOS: "linux" 
   GOARCH: "amd64"
 
-on: workflow_dispatch
-#   push:
-#     branches:
-#       - master
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   deploy:
