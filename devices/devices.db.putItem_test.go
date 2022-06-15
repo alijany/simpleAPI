@@ -6,8 +6,8 @@ import (
 
 func TestPutItem(t *testing.T) {
 	err := putItem(mockConfig, &Device{
-		Id:          "/devices/id1",
-		DeviceModel: "/devicemodels/id1",
+		Id:          "id1",
+		DeviceModel: "id1",
 		Name:        "Sensor",
 		Note:        "Testing a sensor.",
 		Serial:      "A020000102",
@@ -17,8 +17,8 @@ func TestPutItem(t *testing.T) {
 	}
 	// check for invalid DeviceModel
 	err = putItem(mockConfig, &Device{
-		Id:          "/devices/id1",
-		DeviceModel: "/devicemodels/id2",
+		Id:          "id1",
+		DeviceModel: "idd2",
 		Name:        "Sensor",
 		Note:        "Testing a sensor.",
 		Serial:      "A020000102",

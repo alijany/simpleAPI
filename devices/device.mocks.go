@@ -22,11 +22,11 @@ func (m *DynamodbMockClient) GetItem(input *dynamodb.GetItemInput) (
 	switch *input.TableName {
 	case deviceTableName:
 		key := *input.Key["Id"].S
-		if key == "/devices/id1" {
+		if key == "id1" {
 			return &dynamodb.GetItemOutput{
 				Item: map[string]*dynamodb.AttributeValue{
-					"Id":          {S: aws.String("/devices/id1")},
-					"DeviceModel": {S: aws.String("/devicemodels/id1")},
+					"Id":          {S: aws.String("id1")},
+					"DeviceModel": {S: aws.String("id1")},
 					"Name":        {S: aws.String("Sensor")},
 					"Note":        {S: aws.String("Testing a sensor.")},
 					"Serial":      {S: aws.String("A020000102")},
@@ -37,10 +37,10 @@ func (m *DynamodbMockClient) GetItem(input *dynamodb.GetItemInput) (
 		}
 	case modelTableName:
 		key := *input.Key["Id"].S
-		if key == "/devicemodels/id1" {
+		if key == "id1" {
 			return &dynamodb.GetItemOutput{
 				Item: map[string]*dynamodb.AttributeValue{
-					"Id":   {S: aws.String("/devicemodels/id1")},
+					"Id":   {S: aws.String("/id1")},
 					"Name": {S: aws.String("Test model")},
 					"Note": {S: aws.String("Testing a model.")},
 				},
@@ -61,8 +61,8 @@ func (m *DynamodbMockClient) PutItem(input *dynamodb.PutItemInput) (
 ) {
 	return &dynamodb.PutItemOutput{
 		Attributes: map[string]*dynamodb.AttributeValue{
-			"Id":          {S: aws.String("/devices/id1")},
-			"DeviceModel": {S: aws.String("/devicemodels/id1")},
+			"Id":          {S: aws.String("id1")},
+			"DeviceModel": {S: aws.String("id1")},
 			"Name":        {S: aws.String("Sensor")},
 			"Note":        {S: aws.String("Testing a sensor.")},
 			"Serial":      {S: aws.String("A020000102")},

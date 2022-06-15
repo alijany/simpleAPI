@@ -16,8 +16,8 @@ func TestHandler(t *testing.T) {
 	}
 	// check put request
 	body, err := json.Marshal(map[string]string{
-		"id":          "/devices/id1",
-		"deviceModel": "/devicemodels/id1",
+		"id":          "id1",
+		"deviceModel": "id1",
 		"name":        "Sensor",
 		"note":        "Testing a sensor.",
 		"serial":      "A020000102",
@@ -42,7 +42,7 @@ func TestHandler(t *testing.T) {
 		HTTPMethod: http.MethodGet,
 		Path:       "api/devices/id1",
 		QueryStringParameters: map[string]string{
-			"id": "/devices/id1",
+			"id": "id1",
 		},
 	}
 	res, err = handler(request)
@@ -54,7 +54,7 @@ func TestHandler(t *testing.T) {
 		HTTPMethod: http.MethodPut,
 		Path:       "api/devices/id1",
 		QueryStringParameters: map[string]string{
-			"id": "/devices/id1",
+			"id": "id1",
 		},
 	}
 	res, err = handler(request)

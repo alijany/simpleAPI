@@ -1,18 +1,12 @@
 
 import type { Serverless } from 'serverless/aws';
-// import deviceFunctions from './devices/devices.functions';
+import deviceFunctions from './devices/devices.functions';
 
 const serverlessConfiguration: Serverless = {
   app: 'aws-simple-api',
   service: 'aws-simple-api',
   functions: {
-    devices: {
-      handler: 'bin/main',
-      events: [
-        { http: { method: 'post', path: '/api/devices', cors: true } },
-        { http: { method: 'get', path: '/api/devices/{id+}', cors: true } },
-      ]
-    }
+    ...deviceFunctions
   },
   package: {
     exclude: ["./**"],

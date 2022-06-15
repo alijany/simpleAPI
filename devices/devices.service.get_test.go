@@ -11,9 +11,9 @@ func TestGet(t *testing.T) {
 	// check normal request
 	request := events.APIGatewayProxyRequest{
 		HTTPMethod: http.MethodGet,
-		Path:       "api/devices/devices/id1",
+		Path:       "api/devices/id1",
 		QueryStringParameters: map[string]string{
-			"id": "/devices/id1",
+			"id": "id1",
 		},
 	}
 	res, err := get(mockConfig, request)
@@ -23,9 +23,9 @@ func TestGet(t *testing.T) {
 	// check invalid id format
 	request = events.APIGatewayProxyRequest{
 		HTTPMethod: http.MethodGet,
-		Path:       "api/devices/id1",
+		Path:       "api/devices/iid1",
 		QueryStringParameters: map[string]string{
-			"id": "/id1",
+			"id": "iid1",
 		},
 	}
 	res, err = get(mockConfig, request)
@@ -37,7 +37,7 @@ func TestGet(t *testing.T) {
 		HTTPMethod: http.MethodGet,
 		Path:       "api/devices/id2",
 		QueryStringParameters: map[string]string{
-			"id": "/devices/id2",
+			"id": "id2",
 		},
 	}
 	res, err = get(mockConfig, request)
