@@ -6,6 +6,13 @@
 
 A simple AWS Lambda with Go
 
+``Note:`` The valid rules for defining Model and device identifiers are:
+  -  It should start with `id`.
+  -  It should end with digits.
+  -  It should be a single word, the white spaces are not allowed.
+  
+example : id23
+
 # Table of content:
 
 - [AWS Simple API](#aws-simple-api)

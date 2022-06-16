@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
+	"github.com/fatih/structs"
 )
 
 func put(config *common.Config, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
@@ -20,11 +21,14 @@ func put(config *common.Config, req events.APIGatewayProxyRequest) (events.APIGa
 		return common.ClientError(http.StatusUnprocessableEntity)
 	}
 
-	if device.Name == "" || device.Note == "" ||
-		device.Serial == "" || device.DeviceModel == "" ||
-		!idRegex.MatchString(device.DeviceModel) ||
-		!idRegex.MatchString(device.Id) {
-		return common.ClientError(http.StatusBadRequest)
+	for k, v := range structs.New(device).Map() {
+		if v == "" {
+			return common.ClientErrorMsg(http.StatusBadRequest, k+"is required")
+		}
+	}
+
+	if !idRegex.MatchString(device.DeviceModel) || !idRegex.MatchString(device.Id) {
+		return common.ClientErrorMsg(http.StatusBadRequest, "invalid id")
 	}
 
 	err = putItem(config, device)

@@ -25,3 +25,10 @@ func ClientError(status int) (events.APIGatewayProxyResponse, error) {
 		Body:       http.StatusText(status),
 	}, nil
 }
+
+func ClientErrorMsg(status int, msg string) (events.APIGatewayProxyResponse, error) {
+	return events.APIGatewayProxyResponse{
+		StatusCode: status,
+		Body:       msg,
+	}, nil
+}

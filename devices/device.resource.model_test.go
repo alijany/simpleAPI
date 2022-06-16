@@ -9,6 +9,6 @@ func TestCreateModelTable(t *testing.T) {
 	go createModelTable(mockConfig, channel)
 	err := <-channel
 	if err != nil {
-		t.Error("error in getDevice", err)
+		t.Error("error in create model table : ", err)
 	}
 }
