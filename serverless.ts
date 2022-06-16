@@ -34,7 +34,6 @@ const serverlessConfiguration: Serverless = {
             // 'dynamodb:DeleteItem',
 
           ],
-          // TODO
           Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.TABLE_PREFIX}*'
         }]
       }
