@@ -32,7 +32,7 @@ func put(config *common.Config, req events.APIGatewayProxyRequest) (events.APIGa
 	}
 
 	if !idRegex.MatchString(device.DeviceModel) || !idRegex.MatchString(device.Id) {
-		return common.ClientErrorMsg(http.StatusBadRequest, `{"message":"id is required"}`)
+		return common.ClientErrorMsg(http.StatusBadRequest, `{"message":"id is invalid"}`)
 	}
 
 	err = putItem(config, device)
