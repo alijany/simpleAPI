@@ -42,9 +42,6 @@ jobs:
         go-version: "^1.18.3"
         cache: true
     - run: go get
-    - uses: actions/setup-go@v3.2.0
-      with: 
-        go-version: "^1.18.3"
     - run: env GOOS=linux go build -ldflags="-s -w" -o bin/main main.go
     - name: Serverless deploy
       uses: serverless/github-action@v3.1
