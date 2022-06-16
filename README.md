@@ -36,6 +36,10 @@ example : id23
 
 As a quick setup you can export them as `Actions secrets` so they would be accessible to Serverless and the AWS SDK
 
+* secrets:
+  - AWS_ACCESS_KEY_ID
+  - AWS_SECRET_ACCESS_KEY
+
 # Deploy
 
 To deploy changes, simply push theme to github, no further action is needed !
