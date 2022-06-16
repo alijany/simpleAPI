@@ -20,7 +20,7 @@ func Handler(config *common.Config) (HandlerCallback, error) {
 	// skip errors only if tables exist!
 	for i := 0; i < 2; i++ {
 		err := <-channel
-		if aerr, ok := err.(awserr.Error); ok && aerr.Code() == dynamodb.ErrCodeTableAlreadyExistsException {
+		if aerr, ok := err.(awserr.Error); ok && aerr.Code() != dynamodb.ErrCodeTableAlreadyExistsException {
 			return nil, err
 		}
 	}
