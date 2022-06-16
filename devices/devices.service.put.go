@@ -2,6 +2,7 @@ package devices
 
 import (
 	"encoding/json"
+	"fmt"
 	"main/common"
 	"net/http"
 
@@ -23,12 +24,15 @@ func put(config *common.Config, req events.APIGatewayProxyRequest) (events.APIGa
 
 	for k, v := range structs.New(device).Map() {
 		if v == "" {
-			return common.ClientErrorMsg(http.StatusBadRequest, k+"is required")
+			return common.ClientErrorMsg(
+				http.StatusBadRequest,
+				fmt.Sprintf(`{"message":"%v is required"}`, k),
+			)
 		}
 	}
 
 	if !idRegex.MatchString(device.DeviceModel) || !idRegex.MatchString(device.Id) {
-		return common.ClientErrorMsg(http.StatusBadRequest, "invalid id")
+		return common.ClientErrorMsg(http.StatusBadRequest, `{"message":"id is required"}`)
 	}
 
 	err = putItem(config, device)
