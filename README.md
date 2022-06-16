@@ -17,19 +17,24 @@ example : id23
 
 - [AWS Simple API](#aws-simple-api)
 - [Table of content:](#table-of-content)
+- [AWS Credentials](#aws-credentials)
 - [Deploy](#deploy)
 - [Project Structure](#project-structure)
-  - [**/common**](#assets)
+  - [**/common**](#common)
   - [**/service**](#service)
     - [**service.main.go**](#servicemaingo)
     - [**service.types.go**](#servicetypesgo)
     - [**service.service.*.go**](#serviceservicego)
     - [**service.functions.ts**](#servicefunctionsts)
-    - [**service.db.*.go**](#servicedbts)
-    - [**service.resource.*.go**](#serviceresourcets)
-    - [**service.mock.go**](#servicemockts)
+    - [**service.db.*.go**](#servicedbgo)
+    - [**service.resource.*.go**](#serviceresourcego)
+    - [**service.mock.go**](#servicemockgo)
 
 ---
+
+# AWS Credentials
+
+As a quick setup you can export them as `Actions secrets` so they would be accessible to Serverless and the AWS SDK
 
 # Deploy
 
