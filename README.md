@@ -2,7 +2,7 @@
 # AWS Simple API
 
 [![Deploy master branch](https://github.com/alijany/simpleAPI/actions/workflows/deploy.yml/badge.svg)](https://github.com/alijany/simpleAPI/actions/workflows/deploy.yml)
-[![Deploy master branch](https://github.com/alijany/simpleAPI/actions/workflows/test.yml/badge.svg)](https://github.com/alijany/simpleAPI/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/alijany/simpleAPI/branch/master/graph/badge.svg?token=I7SQ62E80I)](https://codecov.io/gh/alijany/simpleAPI)
 
 A simple AWS Lambda with Go
 

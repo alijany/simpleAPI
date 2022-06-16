@@ -1,13 +1,13 @@
-name: Deploy master branch
+name: Deploy
 
-on:
+on:  
   push:
     branches:
       - master
 
 jobs:
-  deploy:
-    name: deploy
+  prepare:
+    name: prepare
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -15,7 +15,6 @@ jobs:
     - name: Setup Node.js environment
       uses: actions/setup-node@v3.3.0
     - run: npm ci
-    
     # install & build golang files
     - name: Setup Go
       uses: actions/setup-go@v3.2.0
@@ -23,9 +22,25 @@ jobs:
         go-version: "^1.18.3"
     - run: go version
     - run: go get
+
+  test:
+    needs: prepare
+    name: test
+    - name: Generate coverage report
+      run: go test  ./... -covermode=atomic -coverprofile=coverage.txt
+    - name: Upload coverage report
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+
+  deploy:
+    needs: [prepare, test]
+    - name: Deploy
+      uses: actions/setup-go@v3.2.0
+      with: 
+        go-version: "^1.18.3"
     - run: env GOOS=linux go build -ldflags="-s -w" -o bin/main main.go
-      
-    - name: serverless deploy
+    - name: Serverless deploy
       uses: serverless/github-action@v3.1
       with:
         args: deploy

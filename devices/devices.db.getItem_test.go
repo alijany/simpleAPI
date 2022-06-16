@@ -10,6 +10,10 @@ func TestGetItem(t *testing.T) {
 	if err != nil || device == nil {
 		t.Error("error in getItem", err, device)
 	}
+	model, err := getItemById[Device](mockConfig, modelTableName, "id2")
+	if err != nil || device == nil {
+		t.Error("error in getItem", err, model)
+	}
 	// Test empty result
 	empty, err := getItemById[struct{}](mockConfig, "Empty", "id1")
 	if err != nil || empty != nil {
@@ -21,7 +25,7 @@ func TestGetItem(t *testing.T) {
 		t.Error("error in getItem", err, notFound)
 	}
 	// test invalid generic
-	gen, err := getItemById[string](mockConfig, deviceTableName, "id1")
+	gen, err := getItemById[string](mockConfig, modelTableName, "id1")
 	if err == nil || gen != nil {
 		t.Error("error in getItem", err, notFound)
 	}
