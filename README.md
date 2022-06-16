@@ -25,9 +25,9 @@ example : id23
     - [**service.types.go**](#servicetypesgo)
     - [**service.service.*.go**](#serviceservicego)
     - [**service.functions.ts**](#servicefunctionsts)
-    - [**service.db.*.ts**](#servicedbts)
-    - [**service.resource.*.ts**](#serviceresourcets)
-    - [**service.mock.ts**](#servicemockts)
+    - [**service.db.*.go**](#servicedbts)
+    - [**service.resource.*.go**](#serviceresourcets)
+    - [**service.mock.go**](#servicemockts)
 
 ---
 
@@ -75,11 +75,11 @@ const deviceFunctions: NonNullable<Serverless['functions']> = {
 }
 ```
 
-### **service.db.*.ts**
+### **service.db.*.go**
 Manipulates dynamoDb data.
 
-### **service.resource.*.ts**
+### **service.resource.*.go**
 Define any kind of AWS resource like dynamoDB tables in here.
 
-### **service.mock.ts**
+### **service.mock.go**
 Define all function and resources which be used in testing
