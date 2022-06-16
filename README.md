@@ -19,7 +19,7 @@ example : id23
 - [Table of content:](#table-of-content)
 - [Deploy](#deploy)
 - [Project Structure](#project-structure)
-  - [**/assets**](#assets)
+  - [**/common**](#assets)
   - [**/service**](#service)
     - [**service.main.go**](#servicemaingo)
     - [**service.types.go**](#servicetypesgo)
@@ -39,7 +39,7 @@ To deploy changes, simply push theme to github, no further action is needed !
 
 # Project Structure
 
-## **/assets**
+## **/common**
 
 If you have a code that will be used everywhere in the project, add it here...
 
