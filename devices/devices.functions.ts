@@ -6,6 +6,7 @@ const deviceFunctions: NonNullable<Serverless['functions']> = {
         events: [
             { http: { method: 'post', path: '/api/devices', cors: true } },
             { http: { method: 'get', path: '/api/devices/{id}', cors: true } },
+            { http: { method: 'get', path: '/api/temp/{id+}', cors: true } },
         ]
     }
 }

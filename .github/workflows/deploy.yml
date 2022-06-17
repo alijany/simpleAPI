@@ -3,7 +3,7 @@ name: Deploy
 on:  
   push:
     branches:
-      - master
+      - prefixed-id
     paths-ignore:
       - '.github/**'
       - '**.md'
