@@ -7,8 +7,8 @@
 A simple AWS Lambda with Go
 
 ``Note:`` The valid rules for defining Model and Device identifiers are:
-  -  Device ID should start with `/devices/id1`.
-  -  Model ID start with `/devicemodels/id1`.
+  -  Device ID should start with `/devices`.
+  -  Model ID start with `/devicemodels`.
   -  It should end with digits.
   -  It should be a single word, the white spaces are not allowed.
   
