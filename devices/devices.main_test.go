@@ -16,8 +16,8 @@ func TestHandler(t *testing.T) {
 	}
 	// check put request
 	body, err := json.Marshal(map[string]string{
-		"id":          "id1",
-		"deviceModel": "id1",
+		"id":          "/devices/id1",
+		"deviceModel": "/devicemodels/id1",
 		"name":        "Sensor",
 		"note":        "Testing a sensor.",
 		"serial":      "A020000102",
@@ -40,9 +40,9 @@ func TestHandler(t *testing.T) {
 	// check get request
 	request = events.APIGatewayProxyRequest{
 		HTTPMethod: http.MethodGet,
-		Path:       "api/devices/id1",
+		Path:       "api/devices//devices/id1",
 		PathParameters: map[string]string{
-			"id": "id1",
+			"id": "/devices/id1",
 		},
 	}
 	res, err = handler(request)
@@ -52,9 +52,9 @@ func TestHandler(t *testing.T) {
 	// check not allowed method
 	request = events.APIGatewayProxyRequest{
 		HTTPMethod: http.MethodPut,
-		Path:       "api/devices/id1",
+		Path:       "api/devices//devices/id1",
 		PathParameters: map[string]string{
-			"id": "id1",
+			"id": "/devices/id1",
 		},
 	}
 	res, err = handler(request)

@@ -10,8 +10,8 @@ import (
 
 func TestPut(t *testing.T) {
 	body, err := json.Marshal(map[string]string{
-		"id":          "id1",
-		"deviceModel": "id1",
+		"id":          "/devices/id1",
+		"deviceModel": "/devicemodels/id1",
 		"name":        "Sensor",
 		"note":        "Testing a sensor.",
 		"serial":      "A020000102",
@@ -34,8 +34,8 @@ func TestPut(t *testing.T) {
 	}
 	// check missed input
 	body, err = json.Marshal(map[string]string{
-		"id":          "id1",
-		"deviceModel": "id1",
+		"id":          "/devices/id1",
+		"deviceModel": "/devicemodels/id1",
 		"note":        "Testing a sensor.",
 		"serial":      "A020000102",
 	})

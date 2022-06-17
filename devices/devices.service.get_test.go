@@ -13,7 +13,7 @@ func TestGet(t *testing.T) {
 		HTTPMethod: http.MethodGet,
 		Path:       "api/devices/id1",
 		PathParameters: map[string]string{
-			"id": "id1",
+			"id": "/devices/id1",
 		},
 	}
 	res, err := get(mockConfig, request)
@@ -23,9 +23,9 @@ func TestGet(t *testing.T) {
 	// check invalid id format
 	request = events.APIGatewayProxyRequest{
 		HTTPMethod: http.MethodGet,
-		Path:       "api/devices/iid1",
+		Path:       "api/devices/id1",
 		PathParameters: map[string]string{
-			"id": "iid1",
+			"id": "id1",
 		},
 	}
 	res, err = get(mockConfig, request)
@@ -35,9 +35,9 @@ func TestGet(t *testing.T) {
 	// check device not found
 	request = events.APIGatewayProxyRequest{
 		HTTPMethod: http.MethodGet,
-		Path:       "api/devices/id2",
+		Path:       "api/devices//devices/id2",
 		PathParameters: map[string]string{
-			"id": "id2",
+			"id": "/devices/id2",
 		},
 	}
 	res, err = get(mockConfig, request)

@@ -5,10 +5,13 @@ import (
 	"fmt"
 	"main/common"
 	"net/http"
+	"regexp"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/fatih/structs"
 )
+
+var modelRegex = regexp.MustCompile(`^/devicemodels/id\d+$`)
 
 func put(config *common.Config, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	if req.Headers["content-type"] != "application/json" &&
@@ -31,7 +34,7 @@ func put(config *common.Config, req events.APIGatewayProxyRequest) (events.APIGa
 		}
 	}
 
-	if !idRegex.MatchString(device.DeviceModel) || !idRegex.MatchString(device.Id) {
+	if !modelRegex.MatchString(device.DeviceModel) || !idRegex.MatchString(device.Id) {
 		return common.ClientErrorMsg(http.StatusBadRequest, `{"message":"id is invalid"}`)
 	}
 

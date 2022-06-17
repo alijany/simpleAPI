@@ -10,12 +10,15 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
-var idRegex = regexp.MustCompile(`^id\d+$`)
+var idRegex = regexp.MustCompile(`^/devices/id\d+$`)
 
 func get(config *common.Config, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	id := req.PathParameters["id"]
 	if !idRegex.MatchString(id) {
-		return common.ClientErrorMsg(http.StatusBadRequest, fmt.Sprintf(`{"message":"invalid id: %v"}`, id))
+		return common.ClientErrorMsg(
+			http.StatusBadRequest,
+			fmt.Sprintf(`{"message":"invalid id: %v"}`, id),
+		)
 	}
 
 	device, err := getItemById[Device](config, deviceTableName, id)
